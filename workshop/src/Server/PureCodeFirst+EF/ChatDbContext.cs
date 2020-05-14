@@ -23,12 +23,12 @@ namespace Chat.Server
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PersonToFriend>()
-                .HasKey(bc => new { bc.PersionId, bc.FriendId });
+                .HasKey(bc => new { bc.PersonId, bc.FriendId });
 
             modelBuilder.Entity<PersonToFriend>()
                 .HasOne(bc => bc.Person)
                 .WithMany(b => b.Friends)
-                .HasForeignKey(bc => bc.PersionId);
+                .HasForeignKey(bc => bc.PersonId);
 
             modelBuilder.Entity<PersonToFriend>()
                 .HasOne(bc => bc.Friend)
