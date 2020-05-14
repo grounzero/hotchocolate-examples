@@ -109,7 +109,7 @@ namespace Chat.Server.Users
                         .Build());
             }
 
-            User? user = await dbContext.Users.FirstOrDefaultAsync(t => t.Email == input.Email);
+            User? user = await dbContext.Users.FirstOrDefaultAsync(t => t.Email == input.Email, cancellationToken: cancellationToken);
 
             if (user is null)
             {
@@ -155,7 +155,7 @@ namespace Chat.Server.Users
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             string tokenString = tokenHandler.WriteToken(token);
 
-            await eventSender.SendAsync<string, Person>("online", me);
+            await eventSender.SendAsync<string, Person>("online", me, cancellationToken);
 
             return new LoginPayload(me, tokenString, "bearer", input.ClientMutationId);
         }

@@ -22,7 +22,7 @@ namespace Chat.Server.People
         {
             return await _dbContext.People
                 .Where(t => keys.Contains(t.Email))
-                .ToDictionaryAsync(t => t.Email);
+                .ToDictionaryAsync(t => t.Email, cancellationToken: cancellationToken);
         }
     }
 }
